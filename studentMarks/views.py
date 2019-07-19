@@ -15,7 +15,8 @@ def index(request):
 
 
 def new_user(request):
-
+    # TODO: error handling
+    # TODO: redirects
     first_name = request.POST.get("firstName")
     last_name = request.POST.get("lastName")
     current_class = request.POST.get("currentClass")
