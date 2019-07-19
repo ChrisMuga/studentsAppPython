@@ -26,17 +26,17 @@
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-md-6">
-                            <input type = "text" class="form-control my-1 b0" placeholder="Enter First Name"/>
+                            <input type = "text" class="form-control my-1 b0" placeholder="Enter First Name" name = "firstName"/>
                         </div>
                         <div class="col-md-6">
-                            <input type = "text" class="form-control my-1 b0" placeholder="Enter Last Name"/>
+                            <input type = "text" class="form-control my-1 b0" placeholder="Enter Last Name" name = "lastName"/>
                         </div>
                     </div>
-                    <input type="number" min = 0 class="form-control my-1 b0" placeholder="Current Class"/>
-                    <input type="text" class="form-control my-1 b0" placeholder="Current Stream"/>
-                    <input type="email" class="form-control my-1 b0" placeholder="Email Address"/>
+                    <input type="number" min = 0 class="form-control my-1 b0" placeholder="Current Class" name = "currentClass"/>
+                    <input type="text" class="form-control my-1 b0" placeholder="Current Stream" name = "currentStream"/>
+                    <input type="email" class="form-control my-1 b0" placeholder="Email Address" name = "emailAddress"/>
                     <label class="text-primary">Date Of Birth</label>
-                    <input type="date" class="form-control my-1 b0" placeholder="Date Of Birth"/>
+                    <input type="date" class="form-control my-1 b0" placeholder="Date Of Birth" name = "dateOfBirth"/>
                     <div class="row">
                         <div class="col-md-6">
                             <button class="btn btn-success b0 form-control" type="submit">Enter</button>
