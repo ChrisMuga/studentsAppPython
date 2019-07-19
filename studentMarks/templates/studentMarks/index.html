@@ -22,7 +22,8 @@
                 <div class="alert alert-primary b0">
                     Enter Student Details Here to Register
                 </div>
-                <form>
+                <form method="post" action="new-user">
+                    {% csrf_token %}
                     <div class="row">
                         <div class="col-md-6">
                             <input type = "text" class="form-control my-1 b0" placeholder="Enter First Name"/>
