@@ -19,7 +19,7 @@ def index(request):
 
 def new_user(request):
     # TODO: CleanUp Session / Flush?
-    # TODO: Start with partials.
+    # TODO: NOT NULL = true on User model
     first_name = request.POST.get("firstName")
     last_name = request.POST.get("lastName")
     current_class = request.POST.get("currentClass")

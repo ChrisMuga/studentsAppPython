@@ -23,21 +23,11 @@
                     Enter Student Details Here to Register
                 </div>
                 {% if request.session.response.code == 1 %}
-                    <div class="alert alert-success alert-dismissible fade show b0" role="alert">
-                      {{request.session.response.msg}}
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
+                    {% include "./partials/success_msg.html" with msg=request.session.response.msg %}
                 {% endif %}
 
                 {% if request.session.response.code == 0 %}
-                    <div class="alert alert-danger alert-dismissible fade show b0" role="alert">
-                      {{request.session.response.msg}}
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
+                    {% include "./partials/error_msg.html" with msg=request.session.response.msg %}
                 {% endif %}
 
                 <form method="post" action="new-user">
