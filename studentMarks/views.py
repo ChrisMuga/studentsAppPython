@@ -1,6 +1,7 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.core import serializers
 from .models import User
+from django.db import IntegrityError
 
 app_templates = {
     'student_registration': 'studentMarks/index.html'
@@ -10,13 +11,15 @@ app_templates = {
 def index(request):
     context = "Student Registration"
     return render(request, app_templates["student_registration"], {
-        'context': context
+        'context': context,
     })
+    print(request.GET["data"])
+    print(request.POST["data"])
 
 
 def new_user(request):
-    # TODO: error handling
-    # TODO: redirects
+    # TODO: CleanUp Session / Flush?
+    # TODO: Start with partials.
     first_name = request.POST.get("firstName")
     last_name = request.POST.get("lastName")
     current_class = request.POST.get("currentClass")
@@ -24,15 +27,31 @@ def new_user(request):
     date_of_birth = request.POST.get("dateOfBirth")
     current_stream = request.POST.get("currentStream")
 
-    register_user = User(
-        firstName=first_name,
-        lastName=last_name,
-        currentClass=current_class,
-        emailAddress=email_address,
-        dateOfBirth=date_of_birth,
-        currentStream=current_stream
-    )
+    try:
+        user = User(
+            firstName=first_name,
+            lastName=last_name,
+            currentClass=current_class,
+            emailAddress=email_address,
+            dateOfBirth=date_of_birth,
+            currentStream=current_stream
+        )
 
-    register_user.save()
+        user.save()
+        response = {
+            "code": 1,
+            "msg": "User registration successful",
+        }
 
-    return HttpResponse(register_user.id)
+    except IntegrityError as error:
+        response = {
+            "code": 0,
+            "msg": "Integrity Error"
+        }
+
+    # return HttpResponse(response)
+    request.session["response"] = response
+    return redirect("index")
+
+
+
