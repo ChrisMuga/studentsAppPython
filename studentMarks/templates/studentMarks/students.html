@@ -1,55 +1,66 @@
 {% extends "./index.html" %}
 {% block content%}
-<table class="table table-striped table-hover">
-        <tr>
-            <td>
-                First Name
-            </td>
-            <td>
-                Last Name
-            </td>
-            <td>
-                Email Address
-            </td>
-            <td>
-                Current Class
-            </td>
-            <td>
-                Current Stream
-            </td>
-            <td>
-                Date Of Birth
-            </td>
-            <td>
-               -
-            </td>
-        </tr>
-    {% for student in students%}
-        <tr>
-            <td>
-                {{student.firstName}}
-            </td>
-            <td>
-                {{student.lastName}}
-            </td>
-            <td>
-                {{student.emailAddress}}
-            </td>
-            <td>
-                {{student.currentClass}}
-            </td>
-            <td>
-                {{student.currentStream}}
-            </td>
-            <td>
-                {{student.dateOfBirth}}
+<div class="row my-4 d-flex justify-content-center">
+    <div class="col-md-6">
+        <table class="table table-striped table-hover">
+            <tr>
+                <td>
+                    #
+                </td>
+                <td>
+                    First Name
+                </td>
+                <td>
+                    Last Name
+                </td>
+                <td>
+                    Email Address
+                </td>
+                <td>
+                    Current Class
+                </td>
+                <td>
+                    Current Stream
+                </td>
+                <td>
+                    Date Of Birth
+                </td>
+                <td>
+                   -
+                </td>
+            </tr>
+        {% for student in students%}
+            <tr>
+                <td>
+                    {{forloop.counter}}
+                </td>
+                <td>
+                    {{student.firstName}}
+                </td>
+                <td>
+                    {{student.lastName}}
+                </td>
+                <td>
+                    {{student.emailAddress}}
+                </td>
+                <td>
+                    {{student.currentClass}}
+                </td>
+                <td>
+                    {{student.currentStream}}
+                </td>
+                <td>
+                    {{student.dateOfBirth}}
 
-            <td>
-                <button class="btn btn-primary b0 btn-sm" data-toggle="modal" data-target="#update-user{{student.id}}">Update</button>
-            </td>
-        </tr>
-        {% include "./partials/update_student_modal.html" with title="Update Student Details" student=student%}
-    {% endfor %}
-</table>
+                <td>
+                    <button class="btn btn-primary b0 btn-sm" data-toggle="modal" data-target="#update-user{{student.id}}">Update</button>
+                </td>
+            </tr>
+            {% include "./partials/update_student_modal.html" with title="Update Student Details" student=student%}
+        {% endfor %}
+        </table>
+    </div>
+</div>
+
 
 {% endblock %}

@@ -4,14 +4,14 @@
         <input type = "text" class="form-control my-1 b0" placeholder="Enter First Name" name = "firstName" value = "{{student.firstName}}" required/>
     </div>
     <div class="col-md-6">
-        <input type = "text" class="form-control my-1 b0" placeholder="Enter Last Name" name = "lastName" required/>
+        <input type = "text" class="form-control my-1 b0" placeholder="Enter Last Name" name = "lastName" value = "{{student.lastName}}" required/>
     </div>
 </div>
-<input type="number" min = 0 class="form-control my-1 b0" placeholder="Current Class" name = "currentClass" required/>
-<input type="text" class="form-control my-1 b0" placeholder="Current Stream" name = "currentStream" required/>
-<input type="email" class="form-control my-1 b0" placeholder="Email Address" name = "emailAddress" required/>
+<input type="number" min = 0 class="form-control my-1 b0" placeholder="Current Class" name = "currentClass" value = "{{student.currentClass}}"  />
+<input type="text" class="form-control my-1 b0" placeholder="Current Stream" name = "currentStream" value = "{{student.currentStream}}" required/>
+<input type="email" class="form-control my-1 b0" placeholder="Email Address" name = "emailAddress" value = "{{student.emailAddress}}" required/>
 <label class="text-primary">Date Of Birth</label>
-<input type="date" class="form-control my-1 b0" placeholder="Date Of Birth" name = "dateOfBirth" required/>
+<input type="date" class="form-control my-1 b0" placeholder="Date Of Birth" name = "dateOfBirth" value = "{{student.dateOfBirth}}" required/>
 <div class="row">
     <div class="col-md-6">
         <button class="btn btn-success b0 form-control" type="submit">Enter</button>
