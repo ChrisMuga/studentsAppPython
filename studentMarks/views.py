@@ -13,13 +13,12 @@ def index(request):
     return render(request, app_templates["student_registration"], {
         'context': context,
     })
-    
-
 
 
 def new_user(request):
-    # TODO: CleanUp Session / Flush?
+    # TODO: CleanUp Session / Flush
     # TODO: NOT NULL = true on User model
+    # TODO: Update Student Details
 
     first_name = request.POST.get("firstName")
     last_name = request.POST.get("lastName")
@@ -54,6 +53,7 @@ def new_user(request):
     request.session["response"] = response
     return redirect("index")
 
+
 def students(request):
     context = "Students"
     students = User.objects.all()
@@ -61,11 +61,5 @@ def students(request):
         'context': context,
         'students': students
     })
-
-def update_student_details(request):
-    # TODO: Start with Update Student Details Fx
-
-
-
 
 
