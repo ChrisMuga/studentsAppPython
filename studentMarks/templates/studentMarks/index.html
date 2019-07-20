@@ -38,17 +38,17 @@
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-md-6">
-                            <input type = "text" class="form-control my-1 b0" placeholder="Enter First Name" name = "firstName"/>
+                            <input type = "text" class="form-control my-1 b0" placeholder="Enter First Name" name = "firstName" required/>
                         </div>
                         <div class="col-md-6">
-                            <input type = "text" class="form-control my-1 b0" placeholder="Enter Last Name" name = "lastName"/>
+                            <input type = "text" class="form-control my-1 b0" placeholder="Enter Last Name" name = "lastName" required/>
                         </div>
                     </div>
-                    <input type="number" min = 0 class="form-control my-1 b0" placeholder="Current Class" name = "currentClass"/>
-                    <input type="text" class="form-control my-1 b0" placeholder="Current Stream" name = "currentStream"/>
-                    <input type="email" class="form-control my-1 b0" placeholder="Email Address" name = "emailAddress"/>
+                    <input type="number" min = 0 class="form-control my-1 b0" placeholder="Current Class" name = "currentClass" required/>
+                    <input type="text" class="form-control my-1 b0" placeholder="Current Stream" name = "currentStream" required/>
+                    <input type="email" class="form-control my-1 b0" placeholder="Email Address" name = "emailAddress" required/>
                     <label class="text-primary">Date Of Birth</label>
-                    <input type="date" class="form-control my-1 b0" placeholder="Date Of Birth" name = "dateOfBirth"/>
+                    <input type="date" class="form-control my-1 b0" placeholder="Date Of Birth" name = "dateOfBirth" required/>
                     <div class="row">
                         <div class="col-md-6">
                             <button class="btn btn-success b0 form-control" type="submit">Enter</button>
