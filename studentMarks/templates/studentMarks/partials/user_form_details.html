@@ -1,7 +1,7 @@
 {% csrf_token %}
 <div class="row">
     <div class="col-md-6">
-        <input type = "text" class="form-control my-1 b0" placeholder="Enter First Name" name = "firstName" required/>
+        <input type = "text" class="form-control my-1 b0" placeholder="Enter First Name" name = "firstName" value = "{{student.firstName}}" required/>
     </div>
     <div class="col-md-6">
         <input type = "text" class="form-control my-1 b0" placeholder="Enter Last Name" name = "lastName" required/>

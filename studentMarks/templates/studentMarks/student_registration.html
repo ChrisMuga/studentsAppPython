@@ -17,7 +17,7 @@
         {% endif %}
 
         <form method="post" action="new-user">
-            {% include "./partials/user_form_details.html" %}
+            {% include "./partials/user_form_details.html" with student=student%}
         </form>
     </div>
 </div>
