@@ -62,6 +62,10 @@ def students(request):
         'students': students
     })
 
+def update_student_details(request):
+    # TODO: Start with Update Student Details Fx
+
+
 
 
 
