@@ -62,4 +62,37 @@ def students(request):
         'students': students
     })
 
+def update_student_details(request):
+    first_name = request.POST.get("firstName")
+    last_name = request.POST.get("lastName")
+    current_class = request.POST.get("currentClass")
+    email_address = request.POST.get("emailAddress")
+    date_of_birth = request.POST.get("dateOfBirth")
+    current_stream = request.POST.get("currentStream")
+
+    student = User.objects.get(emailAddress=email_address)
+
+    student.firstName = first_name
+    student.lastName = last_name
+    student.currentClass = current_class
+    student.emailAddress = email_address
+    student.dateOfBirth = date_of_birth
+    student.currentStream = current_stream
+
+    try:
+        student.save()
+        response = {
+            "code": 1,
+            "msg": "Update successful",
+        }
+    except:
+        response = {
+            "code": 0,
+            "msg": "Something went wrong. Update successful",
+        }
+
+    request.session["response"] = response
+    return redirect("students")
+
+
 
