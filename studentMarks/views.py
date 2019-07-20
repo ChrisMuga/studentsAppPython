@@ -3,7 +3,8 @@ from .models import User
 from django.db import IntegrityError
 
 app_templates = {
-    'student_registration': 'studentMarks/index.html'
+    'student_registration': 'studentMarks/student_registration.html',
+    'students_list': 'studentMarks/students.html'
 }
 
 
@@ -12,8 +13,8 @@ def index(request):
     return render(request, app_templates["student_registration"], {
         'context': context,
     })
-    print(request.GET["data"])
-    print(request.POST["data"])
+    
+
 
 
 def new_user(request):
@@ -43,7 +44,7 @@ def new_user(request):
             "msg": "User registration successful",
         }
 
-    except IntegrityError as error:
+    except IntegrityError:
         response = {
             "code": 0,
             "msg": "Integrity Error"
@@ -52,6 +53,15 @@ def new_user(request):
     # return HttpResponse(response)
     request.session["response"] = response
     return redirect("index")
+
+def students(request):
+    context = "Students"
+    students = User.objects.all()
+    return render(request, app_templates["students_list"], {
+        'context': context,
+        'students': students
+    })
+
 
 
 
