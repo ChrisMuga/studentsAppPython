@@ -45,9 +45,10 @@
                 {{student.dateOfBirth}}
 
             <td>
-                <button class="btn btn-primary">Update</button>
+                <button class="btn btn-primary b0 btn-sm" data-toggle="modal" data-target="#update-user">Update</button>
             </td>
         </tr>
     {% endfor %}
 </table>
+{% include "./partials/update_student_modal.html" %}
 {% endblock %}
