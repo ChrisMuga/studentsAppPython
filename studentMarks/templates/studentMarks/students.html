@@ -20,6 +20,9 @@
             <td>
                 Date Of Birth
             </td>
+            <td>
+               -
+            </td>
         </tr>
     {% for student in students%}
         <tr>
@@ -40,6 +43,9 @@
             </td>
             <td>
                 {{student.dateOfBirth}}
+
+            <td>
+                <button class="btn btn-primary">Update</button>
             </td>
         </tr>
     {% endfor %}
