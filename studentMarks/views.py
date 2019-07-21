@@ -18,8 +18,8 @@ def index(request):
 def new_user(request):
     # TODO: Use Django Messages Instead of Session.
     # TODO: NOT NULL = true on User model
-    # TODO: Update Student Details
-    # TODO: Auth
+    # TODO: Delete User
+
 
     first_name = request.POST.get("firstName")
     last_name = request.POST.get("lastName")
