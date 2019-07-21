@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import User
 from django.db import IntegrityError
+from django.contrib import messages
 
 app_templates = {
     'student_registration': 'studentMarks/student_registration.html',
@@ -16,7 +17,7 @@ def index(request):
 
 
 def new_user(request):
-    # TODO: CleanUp Session / Flush
+    # TODO: Use Django Messages Instead of Session.
     # TODO: NOT NULL = true on User model
     # TODO: Delete User
 
@@ -38,19 +39,18 @@ def new_user(request):
         )
 
         user.save()
+
         response = {
             "code": 1,
             "msg": "User registration successful",
         }
-
+        messages.success(request, response["msg"])
     except IntegrityError:
         response = {
             "code": 0,
             "msg": "Integrity Error"
         }
-
-    # return HttpResponse(response)
-    request.session["response"] = response
+        messages.error(request, response.msg)
     return redirect("index")
 
 
@@ -61,6 +61,7 @@ def students(request):
         'context': context,
         'students': students
     })
+
 
 def update_student_details(request):
     first_name = request.POST.get("firstName")
@@ -85,13 +86,13 @@ def update_student_details(request):
             "code": 1,
             "msg": "Update successful",
         }
+        messages.success(request, response["msg"])
     except:
         response = {
             "code": 0,
             "msg": "Something went wrong. Update successful",
         }
-
-    request.session["response"] = response
+        messages.error(request, response.msg)
     return redirect("students")
 
 

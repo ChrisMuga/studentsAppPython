@@ -1,0 +1,10 @@
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == "success" %}
+            {% include "./success_msg.html" with msg=message %}
+        {% endif %}
+    {% if message.tags == "error" %}
+            {% include "./error_msg.html" with msg=message %}
+        {% endif %}
+    {% endfor %}
+{% endif %}

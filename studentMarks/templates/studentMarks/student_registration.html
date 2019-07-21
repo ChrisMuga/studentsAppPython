@@ -8,14 +8,7 @@
         <div class="alert alert-primary b0">
             Enter Student Details Here to Register
         </div>
-        {% if request.session.response.code == 1 %}
-            {% include "./partials/success_msg.html" with msg=request.session.response.msg %}
-        {% endif %}
-
-        {% if request.session.response.code == 0 %}
-            {% include "./partials/error_msg.html" with msg=request.session.response.msg %}
-        {% endif %}
-
+        {% include "./partials/response_messages.html" %}
         <form method="post" action="new-user">
             {% include "./partials/user_form_details.html" with student=student%}
         </form>
