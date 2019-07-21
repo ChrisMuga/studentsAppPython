@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import User
 from django.db import IntegrityError
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
+from django.http import HttpResponse
 
 app_templates = {
     'student_registration': 'studentMarks/student_registration.html',
@@ -71,28 +73,27 @@ def update_student_details(request):
     date_of_birth = request.POST.get("dateOfBirth")
     current_stream = request.POST.get("currentStream")
 
-    student = User.objects.get(emailAddress=email_address)
-
-    student.firstName = first_name
-    student.lastName = last_name
-    student.currentClass = current_class
-    student.emailAddress = email_address
-    student.dateOfBirth = date_of_birth
-    student.currentStream = current_stream
-
     try:
+        student = User.objects.get(emailAddress=email_address)
+        student.firstName = first_name
+        student.lastName = last_name
+        student.currentClass = current_class
+        student.emailAddress = email_address
+        student.dateOfBirth = date_of_birth
+        student.currentStream = current_stream
         student.save()
         response = {
             "code": 1,
             "msg": "Update successful",
         }
         messages.success(request, response["msg"])
-    except:
+    except ObjectDoesNotExist:
+        HttpResponse("Hello")
         response = {
             "code": 0,
-            "msg": "Something went wrong. Update successful",
+            "msg": f"Error! Email - {email_address} does not exist",
         }
-        messages.error(request, response.msg)
+        messages.error(request, response["msg"])
     return redirect("students")
 
 
