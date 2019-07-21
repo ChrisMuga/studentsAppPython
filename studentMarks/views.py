@@ -18,7 +18,7 @@ def index(request):
 def new_user(request):
     # TODO: CleanUp Session / Flush
     # TODO: NOT NULL = true on User model
-    # TODO: Update Student Details
+    # TODO: Delete User
 
     first_name = request.POST.get("firstName")
     last_name = request.POST.get("lastName")

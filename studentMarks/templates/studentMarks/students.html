@@ -60,7 +60,15 @@
                     {{student.dateOfBirth}}
 
                 <td>
-                    <button class="btn btn-primary b0 btn-sm" data-toggle="modal" data-target="#update-user{{student.id}}">Update</button>
+                    <div class="btn-group dropright">
+                      <button type="button" class="btn btn-success b0 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Actions
+                      </button>
+                      <div class="dropdown-menu">
+                          <button class="dropdown-item text-primary" type="button"data-toggle="modal" data-target="#update-user{{student.id}}"><i class="far fa-edit"></i> Update</button>
+                          <button class="dropdown-item text-danger" type="button"data-toggle="modal" data-target="#update-user{{student.id}}"><i class="fas fa-user-minus"></i> Delete</button>
+                      </div>
+                    </div>
                 </td>
             </tr>
             {% include "./partials/update_student_modal.html" with title="Update Student Details" student=student%}
