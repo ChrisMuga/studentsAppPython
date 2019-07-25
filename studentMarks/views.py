@@ -5,12 +5,13 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from django.http import HttpResponse
 from django.contrib.auth.hashers import make_password
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login as auth_login
 
 app_templates = {
     'student_registration': 'studentMarks/student_registration.html',
     'students_list': 'studentMarks/students.html',
-    'login': 'studentMarks/login.html'
+    'login': 'studentMarks/login.html',
+    'dashboard': 'studentMarks/dashboard.html'
 }
 
 
@@ -118,10 +119,21 @@ def user_login(request):
     password = request.POST['password']
     user = authenticate(email=email, password=password)
     if user is not None:
-        response = "Success"
+        auth_login(request, user)
+        response = f"Welcome, {user.first_name}."
+        messages.success(request, response)
+        return redirect("/dashboard")
     else:
-        response = "Error"
-    return HttpResponse(response)
+        response = "Invalid email-address or password"
+        messages.error(request, response)
+        return redirect("/")
+
+
+def dashboard(request):
+    context = "Dashboard"
+    return render(request, app_templates["dashboard"], {
+        "context": context
+    })
 
 
 
