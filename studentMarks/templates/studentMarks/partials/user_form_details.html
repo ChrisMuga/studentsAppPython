@@ -1,17 +1,21 @@
 {% csrf_token %}
 <div class="row">
     <div class="col-md-6">
-        <input type = "text" class="form-control my-1 b0" placeholder="Enter First Name" name = "firstName" value = "{{student.firstName}}" required/>
+        <input type = "text" class="form-control my-1 b0" placeholder="Enter First Name" name = "firstName" value = "{{student.first_name}}" required/>
     </div>
     <div class="col-md-6">
-        <input type = "text" class="form-control my-1 b0" placeholder="Enter Last Name" name = "lastName" value = "{{student.lastName}}" required/>
+        <input type = "text" class="form-control my-1 b0" placeholder="Enter Last Name" name = "lastName" value = "{{student.last_name}}" required/>
     </div>
 </div>
+<input type="text" class="form-control my-1 b0" placeholder="User Name" name = "username" value="{{student.username}}" required/>
 <input type="number" min = 0 class="form-control my-1 b0" placeholder="Current Class" name = "currentClass" value = "{{student.currentClass}}"  />
 <input type="text" class="form-control my-1 b0" placeholder="Current Stream" name = "currentStream" value = "{{student.currentStream}}" required/>
-<input type="email" class="form-control my-1 b0" placeholder="Email Address" name = "emailAddress" value = "{{student.emailAddress}}" required/>
+<input type="email" class="form-control my-1 b0" placeholder="Email Address" name = "emailAddress" value = "{{student.email}}" required/>
 <label class="text-primary">Date Of Birth</label>
 <input type="date" class="form-control my-1 b0" placeholder="Date Of Birth" name = "dateOfBirth" value = "{{student.dateOfBirth}}" required/>
+{% if not student.password %}
+    <input type="password" class="form-control my-1 b0" placeholder="Password" name="password" required/>
+{% endif %}
 <div class="row">
     <div class="col-md-6">
         <button class="btn btn-success b0 form-control" type="submit">Enter</button>

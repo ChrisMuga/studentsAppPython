@@ -3,8 +3,8 @@
 <div class="row my-4 d-flex justify-content-center">
     <div class="col-md-6">
        {% include "./partials/response_messages.html" %}
-        <table class="table table-striped table-hover">
-            <tr>
+        <table class="table table-striped table-hover text-small">
+            <tr class="text-small">
                 <td>
                     #
                 </td>
@@ -36,13 +36,13 @@
                     {{forloop.counter}}
                 </td>
                 <td>
-                    {{student.firstName}}
+                    {{student.first_name}}
                 </td>
                 <td>
-                    {{student.lastName}}
+                    {{student.last_name}}
                 </td>
                 <td>
-                    {{student.emailAddress}}
+                    {{student.email}}
                 </td>
                 <td>
                     {{student.currentClass}}
@@ -55,12 +55,12 @@
 
                 <td>
                     <div class="btn-group dropright">
-                      <button type="button" class="btn btn-success b0 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <button type="button" class="btn btn-success btn-sm text-small b0 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Actions
                       </button>
                       <div class="dropdown-menu">
-                          <button class="dropdown-item text-primary" type="button"data-toggle="modal" data-target="#update-user{{student.id}}"><i class="far fa-edit"></i> Update</button>
-                          <button class="dropdown-item text-danger" type="button"data-toggle="modal" data-target="#update-user{{student.id}}"><i class="fas fa-user-minus"></i> Delete</button>
+                          <button class="dropdown-item text-primary text-small" type="button"data-toggle="modal" data-target="#update-user{{student.id}}"><i class="far fa-edit"></i> Update</button>
+                          <button class="dropdown-item text-danger text-small" type="button"data-toggle="modal" data-target="#update-user{{student.id}}"><i class="fas fa-user-minus"></i> Delete</button>
                       </div>
                     </div>
                 </td>

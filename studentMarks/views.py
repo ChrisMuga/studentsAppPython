@@ -4,6 +4,7 @@ from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from django.http import HttpResponse
+from  django.contrib.auth.hashers import make_password
 
 app_templates = {
     'student_registration': 'studentMarks/student_registration.html',
@@ -22,22 +23,27 @@ def new_user(request):
     # TODO: Use Django Messages Instead of Session.
     # TODO: NOT NULL = true on User model
     # TODO: Delete User
-
+    username = request.POST.get("username")
     first_name = request.POST.get("firstName")
     last_name = request.POST.get("lastName")
     current_class = request.POST.get("currentClass")
     email_address = request.POST.get("emailAddress")
     date_of_birth = request.POST.get("dateOfBirth")
     current_stream = request.POST.get("currentStream")
+    password = request.POST.get("password")
+
+    password_hash = make_password(password, salt=None, hasher='default')
 
     try:
         user = User(
-            firstName=first_name,
-            lastName=last_name,
+            first_name=first_name,
+            last_name=last_name,
             currentClass=current_class,
-            emailAddress=email_address,
+            email=email_address,
             dateOfBirth=date_of_birth,
-            currentStream=current_stream
+            currentStream=current_stream,
+            username=username,
+            password=password_hash
         )
 
         user.save()
@@ -47,12 +53,13 @@ def new_user(request):
             "msg": "User registration successful",
         }
         messages.success(request, response["msg"])
-    except IntegrityError:
+    except IntegrityError as err:
         response = {
             "code": 0,
             "msg": "Integrity Error"
         }
-        messages.error(request, response.msg)
+        messages.error(request, response['msg'])
+        print(err)
     return redirect("index")
 
 
