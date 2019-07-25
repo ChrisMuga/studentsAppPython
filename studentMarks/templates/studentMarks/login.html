@@ -1,0 +1,18 @@
+{% extends "./index.html" %}
+{% block content %}
+{% load static %}
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6">
+            <form action="user-login" method="post" class="d-flex flex-column">
+                {% csrf_token %}
+                <img src='{% static "/images/student.png" %}' class="logo align-self-center"/>
+                <h3>{{context}}</h3>
+                <input type="text" class="form-control my-1 b0" name="email" placeholder="Email Address"/>
+                <input type="password" class="form-control my-1 b0" name="password" placeholder="Password"/>
+                <hr/>
+                <input type="submit" class="form-control my-1 b0 btn btn-success" value="Enter"/>
+                <input type="reset" class="form-control my-1 b0 btn btn-secondary" value="Clear"/>
+            </form>
+        </div>
+    </div>
+{% endblock%}

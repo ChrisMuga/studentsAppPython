@@ -8,7 +8,8 @@ from  django.contrib.auth.hashers import make_password
 
 app_templates = {
     'student_registration': 'studentMarks/student_registration.html',
-    'students_list': 'studentMarks/students.html'
+    'students_list': 'studentMarks/students.html',
+    'login': 'studentMarks/login.html'
 }
 
 
@@ -102,6 +103,17 @@ def update_student_details(request):
         }
         messages.error(request, response["msg"])
     return redirect("students")
+
+
+def login(request):
+    context = "Login"
+    return render(request, app_templates['login'], {
+        "context": context
+    })
+
+def user_login(request):
+    pass
+
 
 
 
