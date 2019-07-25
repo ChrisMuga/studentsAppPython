@@ -5,7 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from django.http import HttpResponse
 from django.contrib.auth.hashers import make_password
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 
 app_templates = {
     'student_registration': 'studentMarks/student_registration.html',
@@ -135,6 +135,12 @@ def dashboard(request):
         "context": context
     })
 
+
+def logout(request):
+    name = request.user.first_name
+    messages.success(request, f"{name} just logged out")
+    auth_logout(request)
+    return redirect("/")
 
 
 
