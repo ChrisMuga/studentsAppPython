@@ -4,12 +4,14 @@ from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from django.http import HttpResponse
-from  django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 
 app_templates = {
     'student_registration': 'studentMarks/student_registration.html',
     'students_list': 'studentMarks/students.html',
-    'login': 'studentMarks/login.html'
+    'login': 'studentMarks/login.html',
+    'dashboard': 'studentMarks/dashboard.html'
 }
 
 
@@ -111,9 +113,34 @@ def login(request):
         "context": context
     })
 
-def user_login(request):
-    pass
 
+def user_login(request):
+    email = request.POST['email']
+    password = request.POST['password']
+    user = authenticate(email=email, password=password)
+    if user is not None:
+        auth_login(request, user)
+        response = f"Welcome, {user.first_name}."
+        messages.success(request, response)
+        return redirect("/dashboard")
+    else:
+        response = "Invalid email-address or password"
+        messages.error(request, response)
+        return redirect("/")
+
+
+def dashboard(request):
+    context = "Dashboard"
+    return render(request, app_templates["dashboard"], {
+        "context": context
+    })
+
+
+def logout(request):
+    name = request.user.first_name
+    messages.success(request, f"{name} just logged out")
+    auth_logout(request)
+    return redirect("/")
 
 
 
