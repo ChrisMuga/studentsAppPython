@@ -4,7 +4,8 @@ from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from django.http import HttpResponse
-from  django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth import authenticate
 
 app_templates = {
     'student_registration': 'studentMarks/student_registration.html',
@@ -111,8 +112,16 @@ def login(request):
         "context": context
     })
 
+
 def user_login(request):
-    pass
+    email = request.POST['email']
+    password = request.POST['password']
+    user = authenticate(email=email, password=password)
+    if user is not None:
+        response = "Success"
+    else:
+        response = "Error"
+    return HttpResponse(response)
 
 
 
