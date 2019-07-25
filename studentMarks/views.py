@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.http import HttpResponse
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.contrib.auth.decorators import login_required
 
 app_templates = {
     'student_registration': 'studentMarks/student_registration.html',
@@ -66,6 +67,7 @@ def new_user(request):
     return redirect("index")
 
 
+@login_required()
 def students(request):
     context = "Students"
     students = User.objects.all()
@@ -108,10 +110,16 @@ def update_student_details(request):
 
 
 def login(request):
-    context = "Login"
-    return render(request, app_templates['login'], {
-        "context": context
-    })
+    if request.user.is_authenticated:
+        return redirect("/dashboard")
+    else:
+        # check if there is a next field
+        if "next" in request.GET and request.GET["next"] is not None:
+            messages.info(request, "Welp! You have to log in to see that.")
+        context = "Login"
+        return render(request, app_templates['login'], {
+            "context": context
+        })
 
 
 def user_login(request):
@@ -128,7 +136,7 @@ def user_login(request):
         messages.error(request, response)
         return redirect("/")
 
-
+@login_required()
 def dashboard(request):
     context = "Dashboard"
     return render(request, app_templates["dashboard"], {
@@ -138,7 +146,7 @@ def dashboard(request):
 
 def logout(request):
     name = request.user.first_name
-    messages.success(request, f"{name} just logged out")
+    messages.info(request, f"{name} just logged out")
     auth_logout(request)
     return redirect("/")
 

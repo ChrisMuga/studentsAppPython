@@ -1,5 +1,6 @@
 {% extends "./index.html" %}
 {% block content %}
     {% include "./partials/response_messages.html" %}
-    {{user.last_name}}
+    {% include "./partials/dashboard_jumbotron.html" %}
+    {% include "./partials/dashboard_menu.html" %}
 {% endblock %}
