@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import User
+from ..models import User
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
@@ -9,7 +9,6 @@ from django.contrib.auth import authenticate, login as auth_login, logout as aut
 from django.contrib.auth.decorators import login_required
 from studentMarks.templates.studentMarks.Template import Template
 
-# import student marks template class
 StudentMarksTemplate = Template()
 
 
@@ -72,7 +71,6 @@ def students(request):
         'context': context,
         'students': students
     })
-
 
 def update_student_details(request):
     first_name = request.POST.get("firstName")
@@ -147,6 +145,3 @@ def logout(request):
     messages.info(request, f"{name} just logged out")
     auth_logout(request)
     return redirect("/")
-
-
-
