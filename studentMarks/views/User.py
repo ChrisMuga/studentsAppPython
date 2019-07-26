@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import User
+from ..models import User
 from django.db import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
@@ -7,18 +7,14 @@ from django.http import HttpResponse
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.decorators import login_required
+from studentMarks.templates.studentMarks.Template import Template
 
-app_templates = {
-    'student_registration': 'studentMarks/student_registration.html',
-    'students_list': 'studentMarks/students.html',
-    'login': 'studentMarks/login.html',
-    'dashboard': 'studentMarks/dashboard.html'
-}
+StudentMarksTemplate = Template()
 
 
 def index(request):
     context = "Student Registration"
-    return render(request, app_templates["student_registration"], {
+    return render(request, StudentMarksTemplate.student_registration, {
         'context': context,
     })
 
@@ -71,11 +67,10 @@ def new_user(request):
 def students(request):
     context = "Students"
     students = User.objects.all()
-    return render(request, app_templates["students_list"], {
+    return render(request, StudentMarksTemplate.students_list, {
         'context': context,
         'students': students
     })
-
 
 def update_student_details(request):
     first_name = request.POST.get("firstName")
@@ -117,7 +112,7 @@ def login(request):
         if "next" in request.GET and request.GET["next"] is not None:
             messages.info(request, "Welp! You have to log in to see that.")
         context = "Login"
-        return render(request, app_templates['login'], {
+        return render(request, StudentMarksTemplate.login, {
             "context": context
         })
 
@@ -136,10 +131,11 @@ def user_login(request):
         messages.error(request, response)
         return redirect("/")
 
+
 @login_required()
 def dashboard(request):
     context = "Dashboard"
-    return render(request, app_templates["dashboard"], {
+    return render(request, StudentMarksTemplate.dashboard, {
         "context": context
     })
 
@@ -149,6 +145,3 @@ def logout(request):
     messages.info(request, f"{name} just logged out")
     auth_logout(request)
     return redirect("/")
-
-
-
